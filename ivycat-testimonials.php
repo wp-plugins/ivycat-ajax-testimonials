@@ -4,7 +4,7 @@
  *  Plugin Name: IvyCat Ajax Testimonials
  *  Description: Testimonials from Custom Post Type - NOTE: this is a template/framework currently, there are no native styles - I highly recommend knowing CSS and willing to add your own styles before installing.
  *  Author: dgilfoy, ivycat
- *  version: 1.1
+ *  version: 1.11
  */
 
 define( 'ICTESTI_DIR', dirname( __FILE__ ) );
@@ -20,6 +20,11 @@ class IvyCatTestimonials{
         add_action( 'wp_ajax_get-testimonials',  array( &$this, 'more_testimonials' ) );
         add_action( 'wp_ajax_nopriv_get-slides',  array( &$this, 'more_testimonials' ) );
         add_action( 'widgets_init', array( &$this, 'init_widgets' ) );
+        add_action( 'wp_enqueue_scripts', array( &$this, 'load_scripts'));
+    }
+    
+    
+    public function load_scripts(){
         wp_enqueue_script( 'ict-ajax-scripts', ICTESTI_URL . '/assets/ivycat_testimonials_scripts.js', array( 'jquery' ) );
         wp_localize_script( 'ict-ajax-scripts', 'ICSaconn', array(
                 'ajaxurl' => admin_url( 'admin-ajax.php' ),

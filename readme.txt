@@ -11,7 +11,11 @@ Simple plugin for adding dynamic testimonials to your site.
 
 ==Description==
 
-This plugin is a light template/framework aimed primarily at developers that allows you to easily add rotating testimonials to a page. You can add testimonials to a page using a shortcode, widget, or PHP function.  Supports one rotating Testimonial slot per page.  Loads up the first Testimonial directly from the database and pulls in the rest of them via AJAX, speeding up initial page load.  Incorporates a custom post type for the Testimonial.
+This plugin is a light template/framework aimed primarily at developers that allows you to easily add rotating testimonials to a page.  Testimonials are a custom post type.
+
+You can add testimonials to a page using a shortcode, widget, or PHP function.
+
+Supports one rotating Testimonial slot per page.  Loads up the first Testimonial directly from the database and pulls in the rest of them via AJAX, speeding up initial page load.  
 
 Also contains testimonial categories, or groups, so you can call in testimonials based on their category.
 

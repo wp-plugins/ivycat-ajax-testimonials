@@ -2,8 +2,8 @@
 
 /**
  *  Plugin Name: IvyCat Ajax Testimonials
- *  Description: Testimonials from Custom Post Type - NOTE: this is a template/framework currently, there are no native styles - I highly recommend knowing CSS and willing to add your own styles before installing.
- *  Author: dgilfoy, ivycat
+ *  Description: Simple plugin for adding dynamic testimonials to your site.
+ *  Author: dgilfoy, ivycat, sewmyheadon
  *  version: 1.11
  */
 

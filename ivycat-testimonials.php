@@ -2,9 +2,13 @@
 
 /**
  *  Plugin Name: IvyCat Ajax Testimonials
+ *  Plugin URI: http://wordpress.org/extend/plugins/ivycat-ajax-testimonials/
  *  Description: Simple plugin for adding dynamic testimonials to your site.
- *  Author: dgilfoy, ivycat, sewmyheadon
+ *  Author: IvyCat Web Services
+ *  Author URI: http://www.ivycat.com
  *  version: 1.11
+ *  License: GPLv3
+
  */
 
 define( 'ICTESTI_DIR', dirname( __FILE__ ) );

@@ -1,9 +1,12 @@
 === IvyCat Ajax Testimonials ===
 Contributors: dgilfoy, ivycat, sewmyheadon
+Donate link: http://www.ivycat.com/contribute/
 Tags: testimonial, testimonials, commendation, recommendation, widget, custom post type, shortcode, ajax
 Requires at least: 3.0
 Tested up to: 3.4
 Stable tag: trunk
+License: GPLv3 or later
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 ==Short Description ==
 
@@ -47,16 +50,32 @@ Shortcode usage:
 
 == Screenshots ==
 
+1. The plugin in action.
+2. The admin screens.
 
 == Frequently Asked Questions ==
 
-Q: What is the point of this plugin?
-A: We wanted a testimonials plugin that was lightweight and easy to fit within any theme.  Some similar plugins load all the Testimonials at once, hiding the others and using JavaScript to switch which testimonial is visible or doesn't load at all if JavaScript is disabled.  This plugin loads a single testimonial and, once the page is loaded, retrieves the rest of the testimonials via AJAX request.  It receives them in JSON format and the individual elements are switched rather than any hiding/showing going on. 
-Q: What?
-A: Well, this plugin is more for developers or designers.  It doesn't take much to use, but it does require you to do your own styling and eventually we'll incorporate templating (so you can alter the markup without fear of future versions overwriting them). 
-Q: What if I don't know CSS?
-A: We can certainly work with you, and later versions of this plugin might support automatic features and other tweaks. The point of this is an easy to get to template.  Fork it, incorporate it into a theme, have at it.  If you make changes to the core code, I'd recommend renaming and whatnot, so future versions don't overwrite your code.
+= What is the point of this plugin? =
 
+We wanted a testimonials plugin that was lightweight and easy to fit within any theme.  
+
+Some similar plugins load all the Testimonials at once, hiding the others and using JavaScript to switch which testimonial is visible or doesn't load at all if JavaScript is disabled.  
+
+This plugin loads a single testimonial and, once the page is loaded, retrieves the rest of the testimonials via AJAX request.  It receives them in JSON format and the individual elements are switched rather than any hiding/showing going on. 
+
+= What? =
+
+This plugin is more for developers or designers.  
+
+It doesn't take much to use, but it does require you to do your own styling and eventually we'll incorporate templating (so you can alter the markup without fear of future versions overwriting them). 
+
+= What if I don't know CSS? =
+
+We can certainly work with you, and later versions of this plugin might support automatic features and other tweaks. 
+
+The point of this is an easy to get to template.  Fork it, incorporate it into a theme, have at it.  
+
+If you make changes to the core code, I'd recommend renaming and whatnot, so future versions don't overwrite your code.
 
 == Changelog ==
 = 1.11 =
@@ -75,5 +94,3 @@ Upgrade fixes a few minor PHP issues and improves basic documentation.
 == Road Map ==
 
 1. Suggest a feature...
-
-

@@ -26,7 +26,7 @@ Also contains testimonial categories, or groups, so you can call in testimonials
 
 Plugin has no native styles; it's meant to use the styles of your existing theme.
 
-This is a minimal plugin, placing function over form.  If you would like to extend it, or would like us to extend it in later versions, feel free to contact us at admins@ivycat.com, or post feedback in this plugin's support forum.
+This is a minimal plugin, placing function over form.  If you would like to extend it, or would like us to extend it in later versions, feel free to [contact us](http://www.iyvcat.com/contact/), or post feedback in [this plugin's support forum](http://wordpress.org/support/plugin/ivycat-ajax-testimonials).
 
 == Installation ==
 

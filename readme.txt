@@ -39,14 +39,27 @@ You can install from within WordPress using the Plugin/Add New feature, or if yo
 
 == Usage ==
 
-Shortcode usage:
+To actually pull testimonials into your site, you can use:
 
-    *[ic_do_testimonials] - Adds a testimonial, Defaults to three testimonials.
+1. widgets
+1. shortcodes
+1. PHP functions
 
-    *[ic_do_testimonials group='my-created-group'] - Adds testimonials from a custom group.  Defaults to three testimonials.
+### Use a widget:
 
-    *[ic_do_testimonials quantity='5'] - changes default quantity to 5. 
+In your WordPress Dashboard, go to Appearance/Widgets and use the IvyCat Testimonial Widget.
 
+### Using shortcodes:
+
+* [ic_do_testimonials] - Adds a testimonial, Defaults to three testimonials.
+* [ic_do_testimonials group='my-created-group'] - Adds testimonials from a custom group.  Defaults to three testimonials.
+* [ic_do_testimonials quantity='5'] - changes default quantity to 5. 
+
+### Using PHP functions:
+
+If you'd like to embed your testimonials into a template file rather than a widget or editor, you can use shortcodes within a PHP function like so:
+
+`<?php echo do_shortcode("[ic_do_testimonials]"); ?>`
 
 == Screenshots ==
 

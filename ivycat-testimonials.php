@@ -1,16 +1,33 @@
 <?php
 
 /**
- *  Plugin Name: IvyCat Ajax Testimonials
+ *  Plugin Name: IvyCat AJAX Testimonials
  *  Plugin URI: http://wordpress.org/extend/plugins/ivycat-ajax-testimonials/
  *  Description: Simple plugin for adding dynamic testimonials to your site.
  *  Author: IvyCat Web Services
  *  Author URI: http://www.ivycat.com
- *  version: 1.11
- *  License: GPLv3
+ *  version: 1.2
+ *  License: GNU General Public License v2.0
+ *  License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ 
+ ------------------------------------------------------------------------
+	IvyCat AJAX Testimonials, Copyright 2012 IvyCat, Inc. (admins@ivycat.com)
+	
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version.
+	
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
  */
-
 define( 'ICTESTI_DIR', dirname( __FILE__ ) );
 define( 'ICTESTI_URL', str_replace( ABSPATH, site_url( '/' ), ICTESTI_DIR ) );
 require_once 'lib/IvyCatTestimonialsWidget.php';
@@ -22,13 +39,8 @@ class IvyCatTestimonials{
         add_action( 'save_post' , array( &$this, 'save_testimonial_metadata' ) );
         add_shortcode( 'ic_do_testimonials', array( &$this, 'do_testimonials' ) );
         add_action( 'wp_ajax_get-testimonials',  array( &$this, 'more_testimonials' ) );
-        add_action( 'wp_ajax_nopriv_get-slides',  array( &$this, 'more_testimonials' ) );
+        add_action( 'wp_ajax_nopriv_get-testimonials',  array( &$this, 'more_testimonials' ) );
         add_action( 'widgets_init', array( &$this, 'init_widgets' ) );
-        add_action( 'wp_enqueue_scripts', array( &$this, 'load_scripts'));
-    }
-    
-    
-    public function load_scripts(){
         wp_enqueue_script( 'ict-ajax-scripts', ICTESTI_URL . '/assets/ivycat_testimonials_scripts.js', array( 'jquery' ) );
         wp_localize_script( 'ict-ajax-scripts', 'ICSaconn', array(
                 'ajaxurl' => admin_url( 'admin-ajax.php' ),

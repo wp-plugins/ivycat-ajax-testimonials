@@ -1,12 +1,12 @@
-=== IvyCat Ajax Testimonials ===
+=== IvyCat AJAX Testimonials ===
 Contributors: dgilfoy, ivycat, sewmyheadon
 Donate link: http://www.ivycat.com/contribute/
 Tags: testimonial, testimonials, commendation, recommendation, widget, custom post type, shortcode, ajax
 Requires at least: 3.0
 Tested up to: 3.4
 Stable tag: trunk
-License: GPLv3 or later
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
+License: GPLv2
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 ==Short Description ==
 
@@ -76,21 +76,34 @@ Some similar plugins load all the Testimonials at once, hiding the others and us
 
 This plugin loads a single testimonial and, once the page is loaded, retrieves the rest of the testimonials via AJAX request.  It receives them in JSON format and the individual elements are switched rather than any hiding/showing going on. 
 
-= What? =
+If the user doesn't have JavaScript enabled, it simply shows the testimonial that loaded with the page.
 
-This plugin is more for developers or designers.  
+= This plugin looks so plain, where's my style switcher? =
 
-It doesn't take much to use, but it does require you to do your own styling and eventually we'll incorporate templating (so you can alter the markup without fear of future versions overwriting them). 
+This plugin is currently geared more for developers or designers.  
+
+It doesn't take much to use, but it does require you to do your own styling.  Eventually, we may incorporate templating (so you can alter the markup without fear of future versions overwriting them). 
 
 = What if I don't know CSS? =
 
 We can certainly work with you, and later versions of this plugin might support automatic features and other tweaks. 
 
-The point of this is an easy to get to template.  Fork it, incorporate it into a theme, have at it.  
+= Why haven't you added feature x? =
 
-If you make changes to the core code, I'd recommend renaming and whatnot, so future versions don't overwrite your code.
+We built this plugin to scratch our own itch and, while we plan to add more features, we thought it helpful to release to the community right away.
+
+Please feel free to fork it, incorporate it into a theme; have at it.  
+
+If you make changes to the core code, we recommend renaming, so future versions don't overwrite your code.
+
+If you have suggestions for features that could help everyone, please feel free to post in in [this plugin's support forum](http://wordpress.org/support/plugin/ivycat-ajax-testimonials).
 
 == Changelog ==
+
+= 1.2 =
+* Fixed loading error bug for non-logged in users.
+* Fixed slow loading of testimonials without a group.
+
 = 1.11 =
 * Bug fixes - minor PHP errors.
 * Updated documentation.
@@ -100,10 +113,13 @@ If you make changes to the core code, I'd recommend renaming and whatnot, so fut
 
 == Upgrade Notice ==
 
+= 1.2 =
+Fixed serious loading error bug for non-logged in users.
+
 = 1.11 =
 
 Upgrade fixes a few minor PHP issues and improves basic documentation.
 
 == Road Map ==
 
-1. Suggest a feature...
+1. Suggest a feature in [this plugin's support forum](http://wordpress.org/support/plugin/ivycat-ajax-testimonials).

@@ -6,7 +6,7 @@
  *  Description: Simple plugin for adding dynamic testimonials to your site.
  *  Author: IvyCat Web Services
  *  Author URI: http://www.ivycat.com
- *  Version: 1.2.1
+ *  Version: 1.2.2
  *  License: GNU General Public License v2.0
  *  License URI: http://www.gnu.org/licenses/gpl-2.0.html
  
@@ -71,7 +71,7 @@ class IvyCatTestimonials {
             'capability_type'      => 'post',
             'hierarchical'         => false,
             'menu_position'        => 4,
-            'supports'             => array( 'title', 'editor' )
+            'supports'             => array( 'title', 'editor', 'excerpt' )
         );
 
         register_post_type( 'testimonials', $args );
@@ -176,28 +176,42 @@ class IvyCatTestimonials {
     public function do_testimonials( $atts, $content = null ) {
         $atts = shortcode_atts( array(
             'quantity' => 3,
-            'group'    => false
+            'group'    => false,
+			'num_words' => false,
+			'more_tag' => false,
+			'ajax_on' => true,
+			'all_url' => false
         ), $atts );
         extract( $atts );
+        $testimonials = self::get_testimonials( 1, $group, $num_words, $more_tag, $ajax_on );
         
-        $testimonials = self::get_testimonials( 1, $group );
-        ob_start();
-        ?>
+        ob_start(); ?>
         <div id="ivycat-testimonial">
             <blockquote class="testimonial-content">
                 <div class="content"><?php echo $testimonials[0]['testimonial_content'] ?></div>
                 <footer>
                     <cite>
-                        <?php echo $testimonials[0]['testimonial_title']; ?>
+                        <a href="<?php echo $testimonials[0]['testimonial_link']; ?>">
+							<?php echo $testimonials[0]['testimonial_title']; ?>
+						</a>
                     </cite>
                 </footer>
+				<?php if( $all_url ) : ?>
+					<a href="<?php echo $all_url; ?>">See All Testimonals</a>
+				<?php endif; ?>
             </blockquote>
-            <input id="testimonial-dets" type="hidden" name="testimonial-dets" value="<?php echo $quantity . '|' . $group; ?>">
+            <?php if( $ajax_on ): 
+				wp_enqueue_script( 'ict-ajax-scripts' );
+				$details = $quantity . '|' . $group;
+				if( $num_words )
+					$details .=  '|' . $num_words;
+				if( $more_tag )
+					$details .=  '|' . $more_tag; ?>
+				<input id="testimonial-dets" type="hidden" name="testimonial-dets" value="<?php echo $details; ?>">
+			<?php endif; ?>
         </div>
         <?php
         $contents = ob_get_clean();
-        
-        wp_enqueue_script( 'ict-ajax-scripts' );
         
         return $contents;
     }
@@ -205,17 +219,19 @@ class IvyCatTestimonials {
     public function more_testimonials() {
         $dets = explode( '|', $_POST['testimonial-dets'] );
         $group = ( 'All Groups' == $dets[1] ) ? false : $dets[1];
-        $testimonials = self::get_testimonials( $dets[0], $group );
+		$num_words = ( isset( $dets[3] ) ) ? $dets[3] : false;
+		$more_tag = ( isset( $dets[4] ) ) ? $dets[4] : false;
+        $testimonials = self::get_testimonials( $dets[0], $group, $dets[2], $num_words, $more_tag, true );
         echo json_encode( $testimonials );
         wp_die();
     }
     
-    public function get_testimonials( $quantity , $group ) {
+    public function get_testimonials( $quantity , $group, $num_words, $more_tag, $ajax_on ) {
         $args = array(
             'post_type' => 'testimonials',
             'orderby' => 'meta_value_num',
             'meta_key' => 'ivycat_testimonial_order',
-            'order' => 'DESC',
+            'order' => ( $ajax_on ) ? 'ASC' : 'RAND',
             'posts_per_page' => $quantity
         );
         
@@ -223,20 +239,29 @@ class IvyCatTestimonials {
             $args['tax_query'] = array(
                 array(
                     'taxonomy' => 'testimonial-group',
-                    'field' => 'slug',
+                    'field' => is_numeric( $group ) ? 'id' : 'slug',
                     'terms' => $group
                 )
             );
         }
-        
+		
+		$more = ( $more_tag ) ? $more_tag : ' Read More';
         $testimonials = get_posts( $args );
         $testimonial_data = array();
+		
         if ( $testimonials ) {
             foreach( $testimonials as $row ) {
+				
+				$post_more = ( $more_tag )? '<a href="'.home_url( '/testimonial/' .$row->post_name . '/' ).'">'.$more.'</a>' : '';
+				$post_content = ( $num_words ) ?
+					wp_trim_words( $row->post_content, $num_words, $post_more )
+					: $row->post_content;
+					
                 $testimonial_data[] = array(
                     'testimonial_id' => $row->ID,
                     'testimonial_title' => $row->post_title,
-                    'testimonial_content' => $row->post_content
+					'testimonial_link' => home_url( '/testimonials/' ) . $row->post_name . '/',
+                    'testimonial_content' => ( strlen( $row->post_excerpt ) > 1 ) ? $row->post_excerpt : $post_content 
                 );
             }
         }

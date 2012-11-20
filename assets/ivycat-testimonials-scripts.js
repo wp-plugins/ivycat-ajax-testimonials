@@ -7,9 +7,16 @@ jQuery( 'document' ).ready( function( $ ){
             return $.post( ICSaconn.ajaxurl, ajaxData, callback );       
         }
        
-        if( jQuery( '#ivycat-testimonial' ).length ){
+        if( typeof( ICTaconn ) !== 'undefined' ){
             testimonial_start = 1;
-             jQuery.ivycat_ajax_do( { 'action' : 'get-testimonials', 'testimonial-dets' : jQuery( '#testimonial-dets' ).val() }, function( resp ){
+             jQuery.ivycat_ajax_do( {
+					'action' : 'get-testimonials',
+					'ict_quantity' : ICTaconn.ict_quantity,
+					'ict_group' : ICTaconn.ict_group,
+					'num_words' : ICTaconn.num_words,
+					'more_tag' : ICTaconn.more_tag,
+					'all_url' : ICTaconn.all_url
+				}, function( resp ){
                 testimonials = $.parseJSON( resp );
                 //console.log( testimonials );
             });
@@ -18,6 +25,7 @@ jQuery( 'document' ).ready( function( $ ){
                 //console.log( posts );
                 var total = testimonial_length();
                 if( total < 2 ) return;
+				
                 var current = testimonial_start;
                 
                 var next = current+1;
@@ -28,17 +36,17 @@ jQuery( 'document' ).ready( function( $ ){
                     testimonial_start = current +1;
                 }
                 
-                jQuery( '#ivycat-testimonial' ).customFadeOut( 1000, function(){
-                    jQuery( '#ivycat-testimonial cite' ).html( testimonials[current].testimonial_title  );
-                    jQuery( '#ivycat-testimonial div.content' ).html( testimonials[current].testimonial_content  );
-                    jQuery( '#ivycat-testimonial' ).customFadeIn( 1000, function(){});
+                jQuery( '#ivycat-testimonial blockquote' ).customFadeOut( parseInt( ICTaconn.fadeOut ), function(){
+                    jQuery( '#ivycat-testimonial cite' ).html( '<a href="' + testimonials[current].testimonial_link+ '">' + testimonials[current].testimonial_title + '</a>'  );
+                    jQuery( '#ivycat-testimonial div.ict-content' ).html( testimonials[current].testimonial_content  );
+                    jQuery( '#ivycat-testimonial blockquote' ).customFadeIn( parseInt( ICTaconn.fadeIn ), function(){});
                 }); 
             }
             
             rotateSwitch = function( ){
                 play = setInterval(function( ){ //Set timer - this will repeat itself every 8 seconds
-                    if( typeof( testimonials ) !== 'undefined' ) advance_slideshow();
-                }, 8000); //Timer speed in milliseconds (8 seconds)
+                    if( typeof( ICTaconn ) !== 'undefined' ) advance_slideshow();
+                }, ICTaconn.speed); //Timer speed in milliseconds (8 seconds)
             };
             
              rotateSwitch(  );
@@ -46,7 +54,9 @@ jQuery( 'document' ).ready( function( $ ){
             jQuery('#ivycat-testimonial').hover( function() {
                 clearInterval(play);
             }, function() {
-                advance_slideshow();
+                if( typeof ICTaconn !== 'undefined' ){
+					advance_slideshow();
+				}
                 rotateSwitch();
             } );
         }

@@ -6,7 +6,7 @@
  *  Description: Simply add dynamic testimonials to your site.
  *  Author: IvyCat Web Services
  *  Author URI: http://www.ivycat.com
- *  Version: 1.3.1
+ *  Version: 1.3.2
  *  License: GNU General Public License v2.0
  *  License URI: http://www.gnu.org/licenses/gpl-2.0.html
  
@@ -220,8 +220,6 @@ class IvyCatTestimonials {
 		$contents .= ( strlen( $all_url ) > 1 ) ? '<p><a href="' . $all_url .'">See All Testimonals</a></p>' : '';
 		$contents .= '</blockquote>';
 		$contents .= '</div>';
-		
-		$contents .= ob_get_clean();
 		
 		return apply_filters( 'ic_testimonials_contents', $contents );
 	}

@@ -3,7 +3,7 @@ Contributors: dgilfoy, ivycat, sewmyheadon
 Donate link: http://www.ivycat.com/contribute/
 Tags: testimonial, recommendation, reference, referral, testimony, ajax, widget
 Requires at least: 3.0
-Tested up to: 3.4.2
+Tested up to: 3.5
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -120,6 +120,9 @@ We can certainly work with you, and later versions of this plugin might support 
 
 
 == Changelog ==
+
+= 1.3.4 =
+* Fixed a bug that could cause conflicts with the IvyCat AJAX Image Slider
 
 = 1.3.3 =
 * Fixed a couple notices in JS

@@ -6,7 +6,7 @@
  *  Description: Simply add dynamic testimonials to your site.
  *  Author: IvyCat Web Services
  *  Author URI: http://www.ivycat.com
- *  Version: 1.3.3
+ *  Version: 1.3.4
  *  License: GNU General Public License v2.0
  *  License URI: http://www.gnu.org/licenses/gpl-2.0.html
  
@@ -110,10 +110,6 @@ class IvyCatTestimonials {
 		add_shortcode( 'ic_do_testimonials', array( __CLASS__, 'do_testimonials' ) );
 		
 		wp_register_script( 'ict-ajax-scripts', ICTESTI_URL . 'assets/ivycat-testimonials-scripts.js', array( 'jquery' ) );
-		wp_localize_script( 'ict-ajax-scripts', 'ICSaconn', array(
-				'ajaxurl' => admin_url( 'admin-ajax.php' ),
-			)
-		);
 	}
 	
 	public function register_widgets() {
@@ -214,10 +210,11 @@ class IvyCatTestimonials {
 				) )
 			);
 		endif; 
-		$contents = '<div id="ivycat-testimonial">';
+		$testimonial_id = ( 'yes' == $ajax_on ) ? 'ivycat-testimonial' : 'ivycat-testimonial-static';
+		$contents = '<div id="' . $testimonial_id . '">';
 		$contents .= ( $title) ? '<h3>' . $title . '</h3>' : '';
 		$contents .= '<blockquote class="testimonial-content">
-			<div class="ict-content">'. apply_filters( 'the_content', $testimonials[0]['testimonial_content'] ) . '</div>
+			<div class="ict-content">'. $testimonials[0]['testimonial_content'] . '</div>
 			<footer>
 				<cite>';
 		$contents .= ( $link_testimonials ) 
@@ -239,7 +236,8 @@ class IvyCatTestimonials {
 		$more_tag = $_POST['more_tag'];
 
         $testimonials = self::get_testimonials( $quantity, $group, $num_words, $more_tag, 'yes', $_POST['link_testimonials'] );
-        echo json_encode( $testimonials );
+        if( $testimonials )
+        	echo json_encode( $testimonials );
         wp_die();
     }
     
@@ -278,7 +276,9 @@ class IvyCatTestimonials {
 					'testimonial_id' => $row->ID,
 					'testimonial_title' => $row->post_title,
 					'testimonial_link' => ( $link_testimonials ) ? home_url( '/testimonials/' ) . $row->post_name . '/' : false,
-					'testimonial_content' => ( strlen( $row->post_excerpt ) > 1 ) ? $row->post_excerpt : $post_content 
+					'testimonial_content' => ( strlen( $row->post_excerpt ) > 1 ) 
+						? $row->post_excerpt 
+						: apply_filters( 'the_content', $post_content ) 
 				);
 			}
 		}

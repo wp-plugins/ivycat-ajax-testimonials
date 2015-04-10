@@ -11,7 +11,7 @@
  
  ------------------------------------------------------------------------
 	
-	IvyCat AJAX Testimonials, Copyright 2013 IvyCat, Inc. (admins@ivycat.com)
+	IvyCat AJAX Testimonials, Copyright 2015 IvyCat, Inc. (wp@ivycat.com)
 	
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by

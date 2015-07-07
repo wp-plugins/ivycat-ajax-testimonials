@@ -5,7 +5,7 @@
 	Description: Simply add dynamic testimonials to your site.
 	Author: IvyCat, Inc.
 	Author URI: https://ivycat.com
-	Version: 1.5.0
+	Version: 1.5.1
 	License: GNU General Public License v2.0
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	Text Domian: ivycat-ajax-testimonials
@@ -84,7 +84,7 @@ class IvyCatTestimonials {
 			'capability_type'      => 'post',
 			'hierarchical'         => false,
 			'menu_position'        => 4,
-			'supports'             => array( 'title', 'editor', 'excerpt' )
+			'supports'             => array( 'title', 'editor', 'excerpt', 'thumbnail' )
 		) );
 
 		register_post_type( 'testimonials', $args );
